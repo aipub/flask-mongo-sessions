@@ -72,7 +72,7 @@ class MongoDBSessionInterface(SessionInterface):
             if session.modified:
                 response.delete_cookie(key=app.session_cookie_name,
                                        #path=cookie_path,
-                                       #domain=cookie_domain
+                                       domain=self.get_cookie_domain(app),
                                        )
             return
 
@@ -91,7 +91,7 @@ class MongoDBSessionInterface(SessionInterface):
                             value=session.sid,
                             expires=cookie_exp,
                             #path=cookie_path,
-                            #domain=cookie_domain,
+                            domain=self.get_cookie_domain(app),
                             secure=self.get_cookie_secure(app),
                             httponly=self.get_cookie_httponly(app))
 
